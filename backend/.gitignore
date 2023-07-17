@@ -1,0 +1,27 @@
+# Dependency directories
+/node_modules
+/dist
+
+# Environment variables
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs and debugging files
+logs/
+debug.log
+
+# Generated files
+*.log
+*.pid
+*.lock
+*.seed
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+
+
+
