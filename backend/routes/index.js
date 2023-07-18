@@ -1,0 +1,54 @@
+import { Router } from "express";
+
+const router = Router();
+
+router.post("/api/auth/login", (req, res) => {
+   // Handles user login
+});
+
+// Signup route
+router.post("/api/auth/signup", (req, res) => {
+   // Handles user signup
+});
+
+// Create a new job route
+router.post("/api/jobs", (req, res) => {
+   // Handles creating a new job
+});
+
+// View a specific job route
+router.get("/api/jobs/:id", (req, res) => {
+   // Handles viewing a specific job by ID
+});
+
+// Edit a job route
+router.put("/api/jobs/:id", (req, res) => {
+   // Handles editing a job by ID
+});
+
+// Delete a job route
+router.delete("/api/jobs/:id", (req, res) => {
+   // Handles deleting a job by ID
+});
+
+// View all jobs route
+router.get("/api/jobs/all", (req, res) => {
+   // Handles viewing all jobs
+});
+
+// View candidates for a job route
+router.get("/api/jobs/:id/candidates", (req, res) => {
+   // Handles viewing candidates for a specific job by ID
+});
+
+// View details of a candidate route
+router.get("/api/candidates/:id/details", (req, res) => {
+   // Handles viewing details of a specific candidate by ID
+});
+
+// Update candidate status for a job route
+router.put("/api/jobs/:jobId/candidates/:candidateId/status", (req, res) => {
+   // Handles updating the status of a candidate for a specific job
+});
+
+export default router;

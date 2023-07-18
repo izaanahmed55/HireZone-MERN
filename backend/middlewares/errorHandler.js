@@ -1,4 +1,4 @@
-import { ValidationError } from "joi";
+import Joi from "joi";
 
 // Error handling middleware
 const errorHandler = (err, req, res, next) => {
@@ -8,7 +8,7 @@ const errorHandler = (err, req, res, next) => {
    let statusCode = 500;
    let error = "Internal server error";
 
-   if (error instanceof ValidationError) {
+   if (error instanceof Joi.ValidationError) {
       statusCode = 401;
       data.message = error.message;
 
