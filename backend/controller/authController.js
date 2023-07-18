@@ -11,8 +11,8 @@ const register = async (req, res, next) => {
    const userRegisterSchema = Joi.object({
       name: Joi.string().max(30).required(),
       email: Joi.string().email().required(),
-      password: Joi.string().pattern(passwordPattern).required(),
-      confirmPassword: Joi.ref("password"),
+      password: Joi.string().required(),
+      // confirmPassword: Joi.ref("password"),
    });
    const { error } = userRegisterSchema.validate(req.body);
 
@@ -20,26 +20,15 @@ const register = async (req, res, next) => {
       return next(error);
    }
 
-   const { username, name, email, password } = req.body;
+   const { name, email, password } = req.body;
 
    try {
       const emailInUse = await User.exists({ email });
-
-      const usernameInUse = await User.exists({ username });
 
       if (emailInUse) {
          const error = {
             status: 409,
             message: "Email already registered, use another email!",
-         };
-
-         return next(error);
-      }
-
-      if (usernameInUse) {
-         const error = {
-            status: 409,
-            message: "Username not available, choose another username!",
          };
 
          return next(error);
@@ -57,7 +46,6 @@ const register = async (req, res, next) => {
 
    try {
       const userToRegister = new User({
-         username,
          email,
          name,
          password: hashedPassword,
@@ -94,8 +82,9 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
    const userLoginSchema = Joi.object({
-      username: Joi.string().min(5).max(30).required(),
-      password: Joi.string().pattern(passwordPattern),
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+      // password: Joi.string().pattern(passwordPattern),
    });
 
    const { error } = userLoginSchema.validate(req.body);
@@ -104,17 +93,17 @@ const login = async (req, res, next) => {
       return next(error);
    }
 
-   const { username, password } = req.body;
+   const { email, password } = req.body;
 
    let user;
 
    try {
-      user = await User.findOne({ username: username });
+      user = await User.findOne({ email: email });
 
       if (!user) {
          const error = {
             status: 401,
-            message: "Invalid username",
+            message: "Invalid Email",
          };
 
          return next(error);

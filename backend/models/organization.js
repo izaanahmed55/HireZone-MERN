@@ -19,14 +19,14 @@ const organizationSchema = new Schema(
          type: String,
          required: [true, "Number of employees is required"],
       },
-      firstName: {
-         type: String,
-         required: [true, "First name is required"],
-      },
-      lastName: {
-         type: String,
-         required: [true, "Last name is required"],
-      },
+      // firstName: {
+      //    type: String,
+      //    required: [true, "First name is required"],
+      // },
+      // lastName: {
+      //    type: String,
+      //    required: [true, "Last name is required"],
+      // },
       phoneNumber: {
          type: String,
          required: [true, "Phone number is required"],

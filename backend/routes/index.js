@@ -1,15 +1,15 @@
 import { Router } from "express";
-
+import auth from "../controller/authController.js";
+import authenticate from "../middlewares/auth.js";
 const router = Router();
 
-router.post("/api/auth/login", (req, res) => {
-   // Handles user login
-});
+router.post("/api/auth/login", auth.login);
 
 // Signup route
-router.post("/api/auth/signup", (req, res) => {
-   // Handles user signup
-});
+router.post("/api/auth/signup", auth.register);
+
+// Signup route
+router.post("/api/auth/logout", authenticate, auth.logout);
 
 // Create a new job route
 router.post("/api/jobs", (req, res) => {
