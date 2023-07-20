@@ -1,6 +1,10 @@
 import { Router } from "express";
 import auth from "../controller/authController.js";
-import authenticate from "../middlewares/auth.js";
+import {
+   authenticate,
+   verifyOrganizationOwnership,
+} from "../middlewares/auth.js";
+import organization from "../controller/organizationController.js";
 const router = Router();
 
 router.post("/api/auth/login", auth.login);
@@ -11,10 +15,8 @@ router.post("/api/auth/signup", auth.register);
 // Signup route
 router.post("/api/auth/logout", authenticate, auth.logout);
 
-// Create a new job route
-router.post("/api/jobs", (req, res) => {
-   // Handles creating a new job
-});
+// Create a new organization route
+router.post("/api/organization/create", authenticate, organization.create);
 
 // View a specific job route
 router.get("/api/jobs/:id", (req, res) => {

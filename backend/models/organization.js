@@ -29,7 +29,6 @@ const organizationSchema = new Schema(
       // },
       phoneNumber: {
          type: String,
-         required: [true, "Phone number is required"],
       },
       country: {
          type: String,
@@ -40,10 +39,6 @@ const organizationSchema = new Schema(
          type: String,
          required: [true, "Language is required"],
          default: "English",
-      },
-      industries: {
-         type: String,
-         required: [true, "Company industries is required"],
       },
       description: {
          type: String,

@@ -5,14 +5,15 @@ const errorHandler = (err, req, res, next) => {
    console.error("An error occurred:", err);
 
    // Default error values
-   let statusCode = 500;
-   let error = "Internal server error";
+   let statusCode = err.statusCode || 500;
+   let error = err.message || "Internal server error";
+   let data = {}; // Define the 'data' variable
 
-   if (error instanceof Joi.ValidationError) {
+   if (err instanceof Joi.ValidationError) {
       statusCode = 401;
-      data.message = error.message;
+      data.message = err.message;
 
-      return res.status(statusCode).json({ success: false, data: data });
+      return res.status(statusCode).json({ success: false, data });
    }
 
    // Handle Mongoose validation errors
