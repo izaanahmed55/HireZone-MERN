@@ -11,7 +11,7 @@ const authenticate = async (req, res, next) => {
       if (!refreshToken || !accessToken) {
          const error = {
             status: 401,
-            message: "Unauthorized",
+            message: "Unauthorized. ",
          };
 
          return next(error);
@@ -45,21 +45,26 @@ const authenticate = async (req, res, next) => {
 
 const verifyOrganizationOwnership = async (req, res, next) => {
    try {
-      const { organizationId } = req.params;
-      const { userId } = req.user;
+
+      const organizationId = req.body.organizationId;
+      const  userId  = req.user._id;
+      console.log("User Id: ", userId);
+      console.log("organizationId: ", organizationId);
 
       // Check if the organization exists and if the user ID matches the organization's user ID
       const organization = await Organization.findById(organizationId);
-      if (!organization || organization.userId !== userId) {
+      console.log("organization.userId: ", organization.userId , " | ",organization.userId !== userId);
+      if (!organization || organization.userId.toString() !== userId.toString()) {
          const error = {
             status: 401,
-            message: "Unauthorized",
+            message: "Accessing Unauthorized Organization",
          };
          return next(error);
       }
-
+      console.log("lexgoo")
       next();
    } catch (error) {
+
       return next(error);
    }
 };

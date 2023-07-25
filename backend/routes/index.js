@@ -5,6 +5,7 @@ import {
    verifyOrganizationOwnership,
 } from "../middlewares/auth.js";
 import organization from "../controller/organizationController.js";
+import job from "../controller/jobController.js";
 const router = Router();
 
 router.post("/api/auth/login", auth.login);
@@ -18,10 +19,16 @@ router.post("/api/auth/logout", authenticate, auth.logout);
 // Create a new organization route
 router.post("/api/organization/create", authenticate, organization.create);
 
+// Create a new Job route
+router.post(
+   "/api/job/create",
+   authenticate,
+   verifyOrganizationOwnership,
+   job.create
+);
+
 // View a specific job route
-router.get("/api/jobs/:id", (req, res) => {
-   // Handles viewing a specific job by ID
-});
+router.get("/api/jobs/:jobId", authenticate, job.getJobById);
 
 // Edit a job route
 router.put("/api/jobs/:id", (req, res) => {
