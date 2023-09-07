@@ -10,7 +10,7 @@ const router = Router();
 
 router.post("/api/auth/login", auth.login);
 
-// Signup route
+// Signup Route
 router.post("/api/auth/signup", auth.register);
 
 // Signup route
@@ -59,5 +59,7 @@ router.get("/api/candidates/:id/details", (req, res) => {
 router.put("/api/jobs/:jobId/candidates/:candidateId/status", (req, res) => {
    // Handles updating the status of a candidate for a specific job
 });
+
+
 
 export default router;
