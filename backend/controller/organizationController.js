@@ -12,15 +12,6 @@ const create = async (req, res, next) => {
       userId,
    } = req.body;
 
-   //    console.log(
-   //       "User : ",
-   //       req.user,
-   //       " : ",
-   //       req.body.userId,
-   //       "| ",
-   //       req.user._id == req.body.userId
-   //    );
-
    if (req.user._id == req.body.userId) {
       try {
          const organization = await Organization.create({
